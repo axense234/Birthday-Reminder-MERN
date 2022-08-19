@@ -1,0 +1,27 @@
+<mxfile host="65bd71144e">
+    <diagram id="DsRcQS-YwvwIrCc9VJb_" name="Page-1">
+        <mxGraphModel dx="1204" dy="534" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="2" value="&lt;h1 style=&quot;font-size: 39px&quot;&gt;Login System&lt;/h1&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="240" y="60" width="270" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="6" value="When is loading set to true?" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=90;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;fontSize=30;fontFamily=Times New Roman;strokeWidth=1;" parent="1" vertex="1">
+                    <mxGeometry x="40" y="130" width="700" height="280" as="geometry">
+                        <mxRectangle x="40" y="130" width="390" height="90" as="alternateBounds"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="7" value="1.Before showing the site,we get the user's data from the jwt token and set it to the profile state" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;fontSize=14;fontStyle=1" parent="6" vertex="1">
+                    <mxGeometry y="90" width="700" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="8" value="2.After a successfull Sign Up,we also get the user's data from the jwt token and set it to the profile state" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;fontSize=14;fontStyle=1" parent="6" vertex="1">
+                    <mxGeometry y="150" width="700" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="9" value="3.After a successfull Login,we also get the user's data from the jwt token and set it to the profile state." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;fontSize=14;fontStyle=1" parent="6" vertex="1">
+                    <mxGeometry y="210" width="700" height="70" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

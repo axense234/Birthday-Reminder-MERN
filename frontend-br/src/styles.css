@@ -1,0 +1,1251 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 800;
+    box-sizing: border-box;
+    user-select: none;
+}
+
+/* SCROLLBAR STYLING */
+/* ===== Scrollbar CSS ===== */
+/* Firefox */
+* {
+    scrollbar-width: auto;
+    scrollbar-color: #8f54a0 white
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+    width: 16px;
+}
+
+*::-webkit-scrollbar-track {
+    background: white;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: #8f54a0;
+    border-radius: 10px;
+    border: 3px solid white;
+}
+/* ====================== */
+
+body{
+    background-color: #47f6ff;
+    background-repeat: no-repeat;
+    position: relative;
+    min-height: 100%;
+    min-height: 100vh;
+}
+
+
+
+#root{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+/* ANIMATIONS */
+@keyframes main-content-popup {
+    0%{
+        opacity: 0;
+        transform: translateY(10%);
+    }
+    100%{
+        opacity: 1;
+        transform: translateY(-10%);
+    }
+}
+
+/* NAVBAR COMPONENT*/
+nav{
+    /* border: 1px solid black; */
+    display: flex;
+    align-self:stretch;
+    justify-content: space-around;
+    align-items: center;
+    padding: 1rem;
+    background-color: #FCCD04;
+    height: 3rem;
+    box-shadow: 1px 1px 10px 5px black;
+    width: 100%;
+    height: 6rem;
+}
+.buttons-nav{
+    /* border: 1px solid black; */
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0.4rem;
+    gap: 1rem;
+}
+
+.buttons-nav > a,#signup-btn,#logout-btn{
+    margin: 0 0.5rem;
+    padding: 0.5rem;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 800;
+    border-radius: 0.3rem;
+    text-shadow: 1px 1px 3.5px black;
+    background-color: #FFB48F;
+    color: white;
+    letter-spacing: 0.1rem;
+    text-decoration: none;
+    border: 1px solid black;
+
+}
+
+/* PROFILE -NAVBAR */
+.profile-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 0.5rem;
+    border: 1px solid black;
+    padding: 0.5rem;
+    background-color: #FFB48F;
+    color: white;
+    text-shadow: 1px 1px 2px black;
+    border-radius: 0.4rem;
+    letter-spacing: 0.2rem;
+}
+
+#profile-img-def{
+    font-size: 1.5rem;
+    color: black;
+}
+
+.profile-image-nav{
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* LOGO COMPONENT */
+.logo {
+    /* border: 1px solid black; */
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-right: auto;
+    gap: 0.5rem;
+    padding: 1rem;
+    width: max-content;
+}
+
+.logo>h1 {
+    font-size: 2.1rem;
+    color: #A64AC9;
+    letter-spacing: 0.2rem;
+    text-shadow: 1px 1px 1px black;
+}
+
+#logo-icon {
+    font-size: 1.8rem;
+    color:#A64AC9;
+}
+/* MAIN CONTENT COMPONENT */
+.main-content{
+    margin: 10rem 5rem 10rem 5rem;
+    display: flex;
+    animation-name: main-content-popup;
+    animation-duration: 1s;
+    animation-iteration-count: 1;
+    transition: transform 1s,opacity 1s;
+    transform: translateY(-10%);
+}
+
+.main-content-info{
+    /* border: 1px solid black; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+}
+
+#main-content-title{
+    font-size: 3rem;
+    letter-spacing: 0.3rem;
+    color: #A64AC9;
+    text-shadow: 1px 1px 1.5px black;
+    text-align: center;
+    margin-top: 2rem;
+}
+
+#main-content-desc{
+    font-size: 2.1rem;
+    color: #FCCD04;
+    letter-spacing: 0.2rem;
+    text-shadow: 1px 1px 1.5px black;
+    padding: 1rem;
+}
+
+#main-content-desc > a{
+    text-decoration: none;
+    color: #FFB48F;
+    text-decoration: underline;
+}
+
+#main-content-title-hr{
+    width: 50%;
+    height: 0.6vh;
+    background-color: #FCCD04;
+    border: none;
+}
+
+#signup-btn{
+    width: 50%;
+    font-size: 1.6rem;
+}
+
+/* FOOTER COMPONENT */
+
+.footer{
+    width: 100%;
+    height: 9rem;
+    position:absolute;
+    bottom: 0;
+    /* border: 1px solid black; */
+    background-color: #FCCD04;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-around;
+    box-shadow: 1px 1px 6px 2px black;
+}
+
+
+.footer-details{
+    /* border: 1px solid black; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    margin: 1rem;
+}
+
+#footer-copyright{
+    text-align: center;
+    display: flex;
+    align-items: center;
+    color: #17E9E0;
+    text-shadow: 1px 1px 1px black;
+    letter-spacing: 0.12rem;
+}
+
+#copyright-icon{
+    margin: 0 0.5rem;
+}
+
+.footer-sitemap{
+    /* border: 1px solid black; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem;
+}
+
+/* #sitemap-category{
+    color: #A64AC9;
+    letter-spacing: 0.2rem;
+    text-shadow: 1px 1px 1px black;
+} */
+
+.sitemap-links{
+    /* border: 1px solid black; */
+    text-align: left;
+    align-self:flex-start;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    gap: 0.5rem;
+    list-style: square;
+    margin-left: 2rem;
+}
+
+#sitemap-link{
+    text-decoration: none;
+    color: #17E9E0;
+    text-shadow: 1px 1px 1px black;
+}
+
+.footer-sm-icons{
+    display: flex;
+    flex-direction: column;
+    /* border: 1px solid black; */
+    margin: 1rem;
+}
+
+/* #sm-icons-title{
+    color: #A64AC9;
+    text-shadow: 1px 1px 1.5px black;
+    letter-spacing: 0.2rem;
+} */
+
+.sm-icons-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.sm-icons-container > a{
+    text-decoration: none;
+    color: #17E9E0;
+    text-shadow: 1px 1px 1px black;
+    font-size: 1.2rem;
+}
+
+.footer-contact-info{
+    /* border: 1px solid black; */
+    margin: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.footer-title{
+    color: #A64AC9;
+    letter-spacing: 0.2rem;
+    text-shadow: 1px 1px 1px black;
+    font-size: 1.6rem;
+}
+
+.contact-info-container{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.contact-info-container > p{
+    color: #17E9E0;
+    letter-spacing: 0.1rem;
+    text-shadow: 1px 1px 1px black;
+    font-size: 0.7rem;
+}
+
+/* SIGN UP PAGE/LOGIN PAGE */
+
+.form-container{
+    margin: 12rem;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 3rem;
+    padding-top: 2rem;
+    padding-bottom: 0;
+    border-radius: 1rem;
+    border-width: 0.2rem;
+    background-color: #FCCD04;
+    animation-name: main-content-popup;
+    animation-duration: 1s;
+    animation-iteration-count: 1;
+    transition: transform 1s, opacity 1s;
+    transform: translateY(-10%);
+}
+
+#form-title{
+    font-size: 2.5rem;
+    letter-spacing: 0.3rem;
+    color: #A64AC9;
+    text-shadow: 1px 1px 2px black;
+    margin: 1rem;
+}
+
+.form{
+    /* border: 1px solid black; */
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 3rem 0;
+}
+
+.form-info{
+    /* border: 1px solid black; */
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    border-radius: 0.5rem;
+    /* border: 0.2rem solid white; */
+}
+
+.form-info > input{
+    margin-left: auto;
+    font-size: 1rem;
+    background-color: #FFB48F;
+    border-color: #A64AC9;
+    border-width: 0.3rem;
+    border-style: groove;
+}
+
+.form-info > input:focus{
+    outline: none;
+}
+
+.form-info > label{
+    margin-right: 1.3rem;
+    font-size: 1.4rem;
+    letter-spacing: 0.15rem;
+    color: black;
+}
+
+#form-hr{
+    width: 70%;
+    height: 0.3rem;
+    background-color: #17E9E0;
+    border: none;
+    border-radius: 0.1rem;
+}
+
+#page-btn{
+    width: 80%;
+    align-self: center;
+    padding: 0.4rem;
+    margin-top: 2rem;
+    font-size: 1.2rem;
+    letter-spacing: 0.3rem;
+    background-color: #FFB48F;
+    color: white;
+    text-shadow: 1px 1px 2px black;
+}
+
+/* MODAL COMPONENT */
+.modal-form{
+    width: 80%;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+    border-radius: 0.2rem;
+    color: white;
+    background-color: crimson;
+    letter-spacing: 0.2rem;
+    font-size: 1rem;
+    padding: 0.5rem;
+    text-shadow: 1px 1px 2px black;
+    text-align: center;
+    border: 1.5px solid black;
+}
+
+/* SORTING MODAL COMPONENT */
+.sorting-modal-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    opacity: 0;
+    transition: opacity 0.3s;
+    transform: translateY(-65%);
+}
+
+.sorting-modal-options{
+    display: flex;
+    flex-direction: column;
+    border: 2px solid black;
+    border-radius: 0.3rem;
+    padding: 0.75rem;
+    gap: 0.3rem;
+    background-color: #FCCD04;
+}
+
+.sorting-modal-options > button{
+    color:white;
+    text-shadow: 1px 1px 0.5px black;
+    letter-spacing: 0.1rem;
+    font-style: italic;
+    padding: 0.3rem;
+    background-color: #FFB48F;
+
+    font-size: 1.1rem;
+
+}
+
+.triangle-down{
+    transform: translateY(-35%);
+    font-size: 1.3rem;
+}
+
+.sorting-label-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* LOADING COMPONENT */
+.loading-container{
+    align-self: center;
+    text-align: center;
+    margin: 18rem 3rem 3rem 3rem;
+    padding: 3rem;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
+    opacity: 1;
+    transition: opacity 0.5s;
+    animation-name: main-content-popup;
+    animation-duration: 1s;
+    animation-iteration-count: 1;
+    transition: transform 1s, opacity 1s;
+    transform: translateY(-10%);
+}
+
+.loading-card{
+    margin: 1rem;
+    padding: 2rem;
+    margin-left: auto;
+    margin-right: 10rem;
+    gap: 1rem;
+    width: 22%;
+    align-self: flex-start;
+}
+
+#loading-card-h1{
+    font-size: 2rem;
+}
+
+.loading-container > h1{
+    font-size: 4rem;
+    letter-spacing: 0.3rem;
+    color: #A64AC9;
+    text-shadow: 1px 1px 2px black;
+}
+
+.loading-reminders{
+    margin-top: 10rem;
+    width: 100%;
+}
+
+#loading-reminders-h1{
+    font-size: 5.5rem;
+}
+
+/* PROFILE PAGE */
+.profile-content-container{
+    align-self:flex-start;
+    padding: 3rem;
+    margin-top: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2rem;
+    margin-bottom: 8rem;
+    width: 100%;
+    border: 1px solid black;
+}
+
+.profile-content-container > *{
+    height: max-content;
+}
+
+/* PROFILE TITLE */
+.profile-content-title{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem;
+    animation-name: main-content-popup;
+    animation-duration: 1s;
+    animation-iteration-count: 1;
+    transition: transform 1s, opacity 1s;
+    transform: translateY(-10%);
+}
+
+.profile-content-title > h1{
+    font-size: 5rem;
+    color: #A64AC9;
+    text-shadow: 1px 1px 2px black;
+    letter-spacing: 0.3rem;
+}
+
+.profile-content-title > hr{
+    width: 50%;
+    height: 0.3rem;
+    border: none;
+    border-radius: 0.2rem;
+    background-color: #FCCD04;
+    margin-bottom: 1rem;
+}
+
+.profile-content-map{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 2.5rem;
+}
+
+.profile-content-map > a{
+    text-decoration: none;
+    font-size: 1.5rem;
+    color: #17E9E0;
+    text-shadow: 1px 1px 1.5px black;
+    letter-spacing: 0.2rem;
+    border: 1px solid black;
+    padding: 0.5rem;
+    border-radius: 0.3rem;
+    background-color: #A64AC9;
+}
+
+
+/* PROFILE INFO */
+.profile-content-info{
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    color: #17E9E0;
+}
+
+.profile-content-info-details{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    list-style: square;
+    margin-top: 2rem;
+}
+.profile-content-info-details > li{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.profile-content-info-details > li > p{
+    width: max-content;
+    font-size: 1.2rem;
+    border: 1px solid black;
+    text-align: center;
+    padding: 0.5rem;
+    background-color: #FFB48F;
+    color: white;
+    border-radius: 0.3rem;
+    text-shadow: 1px 1px 2px black;
+}
+
+.profile-content-info-details > li > span{
+    color: #FCCD04;
+    text-shadow: 1px 1px 2px black;
+    font-size: 1.3rem;
+}
+
+.profile-part1{
+    display: flex;
+    gap:1rem;
+    animation-name: main-content-popup;
+    animation-duration: 1s;
+    animation-iteration-count: 1;
+    transition: transform 1s, opacity 1s;
+    transform: translateY(-10%);
+    animation-delay: 0.1s;
+}
+
+.profile-image-info{
+    object-fit: cover;
+    width: 5rem;
+    height: 5rem;
+    border-radius: 10%;
+}
+
+/* PROFILE SETTINGS */
+
+.profile-content-settings{
+    padding: 2rem;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+    height: max-content;
+}
+
+.profile-content-settings-form{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+    margin: 2rem 0;
+}
+
+.profile-content-setting{
+    display: flex;
+    gap: 0.75rem;
+    width: 100%;
+}
+
+.profile-content-setting > label{
+    width: max-content;
+    font-size: 1.2rem;
+    border: 1px solid black;
+    text-align: center;
+    padding: 0.5rem;
+    background-color: #FFB48F;
+    color: white;
+    border-radius: 0.3rem;
+    text-shadow: 1px 1px 2px black;
+}
+
+.profile-content-setting > input{
+    margin-left: auto;
+    font-size: 1rem;
+    background-color: #FFB48F;
+    border-color: #A64AC9;
+    border-radius: 0.5rem;
+    border-width: 0.3rem;
+    border-style: groove;
+    max-width: 60%;
+}
+
+#image{
+    max-width: 40%;
+}
+
+
+.profile-content-setting>input:focus {
+    outline: none;
+}
+
+.profile-content-settings > button{
+    width: 50%;
+    background-color: #FFB48F;
+    font-size: 1.3rem;
+    color: white;
+    text-shadow: 1px 1px 2px black;
+    padding: 0.5rem 0.25rem;
+    border: 1px solid black;
+    border-radius: 1rem;
+}
+
+.profile-content-setting>input::-webkit-file-upload-button{
+    background-color: #FFB48F;
+    color: white;
+    text-shadow: 1px 1px 2px black;
+    text-align: center;
+    font-size: 1.3rem;
+    border:none;
+    display: none;
+}
+
+/* PROFILE REMINDERS */
+
+.profile-content-reminders{
+    padding: 2rem;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    width: 100%;
+}
+
+.profile-content-reminders > button{
+    width: 10%;
+    background-color: #FFB48F;
+    font-size: 1.3rem;
+    color: white;
+    text-shadow: 1px 1px 2px black;
+    padding: 0.5rem 0.25rem;
+    border: 1px solid black;
+    border-radius: 1rem;
+}
+
+.profile-content-reminders-list{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    border: 1px solid black;
+    list-style: none;
+    padding: 1rem;
+    width: 100%;
+}
+
+.profile-reminder-li{
+    display: flex;
+    background-color: #FCCD04;
+    gap: 8rem;
+    padding: 1rem;
+    justify-content: flex-start;
+    align-items: center;
+    border-radius: 1rem;
+    border: 2px solid black;
+}
+
+.profile-reminder-li-content{
+    display: flex;
+    margin-left: auto;
+    gap: 25rem;
+}
+
+.profile-reminder-li > img{
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+
+.profile-reminder-li > h3{
+    font-size: 2rem;
+    color: #A64AC9;
+    text-shadow: 1px 1px 2px black;
+    letter-spacing: 0.3rem;
+    max-width: 20%;
+    min-width: 10%;
+    text-align: center;
+    /* Ellipsis */
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.profile-birtday-reminders{
+    display: flex;
+    margin-left: auto;
+    gap: 2rem;
+}
+
+.birthday-reminder{
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    align-items: center;
+    text-align: center;
+}
+
+.birthday-reminder > p{
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    color: #8f54a0;
+    font-weight: 800;
+    text-size-adjust: 1px 1px 1.3px black;
+}
+
+.birthday-reminder > span{
+    font-size: 0.9rem;
+}
+
+.profile-reminder-li-buttons{
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: space-around;
+    margin-left: auto;
+    margin-right: 3rem;
+}
+
+.edit-reminder,.delete-reminder{
+    background-color: #FCCD04;
+    font-size: 1.5rem;
+    border: none;
+    margin-left: auto;
+}
+
+.edit-reminder{
+    color: green;
+}
+.delete-reminder{
+    color: red;
+}
+
+
+.profile-part2{
+    width: 100%;
+}
+
+/* REMINDERS PAGE */
+.reminders-page-container{
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    margin-bottom: 15rem;
+    width: 100%;
+}
+
+.reminders-page-title{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 1rem;
+    align-self: flex-start;
+}
+
+.reminders-page-title > h1{
+    font-size: 5rem;
+    color: #A64AC9;
+    text-shadow: 1px 1px 2px black;
+    letter-spacing: 0.3rem;
+}
+
+.reminders-page-title > hr{
+    height: 0.3rem;
+    width: 30%;
+    background-color: #FCCD04;
+    border: none;
+    border-radius: 0.2rem;
+}
+
+.reminders-page-options{
+    display: flex;
+    align-self: flex-start;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    gap: 5rem;
+    margin: 2rem 0;
+}
+
+.options-btn{
+    text-decoration: none;
+    text-align: center;
+    background-color: #FFB48F;
+    color: white;
+    text-shadow: 1px 1px 2px black;
+    border: 1px solid black;
+    padding: 0.8rem 0.5rem;
+    font-size: 1.4rem;
+    border-radius: 0.4rem;
+    letter-spacing: 0.2rem;
+    user-select: none;
+}
+
+.options-form{
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    gap: 1.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid black;
+    background-color: #FCCD04;
+}
+
+.options-form > input{
+    font-size: 1.1rem;
+    padding: 0.5rem;
+    padding-left: 0;
+    border: 1px solid black;
+    border-radius: 0.2rem;
+}
+
+.sorting-input-container{
+    background-color: white;
+    padding: 0.35rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.2rem;
+    border-radius: 0.3rem;
+    border: 1.5px solid black;
+}
+
+.sorting-input-container > input{
+    border: none;
+    outline: none;
+}
+
+.reminders-page-content{
+    display: flex;
+    align-items: flex-start;
+    justify-items:center;
+    gap: 5rem;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+}
+
+.no-jwttoken-reminders{
+    padding: 3rem;
+    margin: 10rem 4rem;
+    text-align: center;
+    font-size: 3.5rem;
+    color: #A64AC9;
+    text-shadow: 1px 1px 2px black;
+    letter-spacing: 0.3rem;
+    animation-name: main-content-popup;
+    animation-iteration-count: 1;
+    animation-duration: 0.8s;
+    transform: translateY(-10%);
+}
+
+.no-jwttoken-reminders > a{
+    margin: 0 1rem;
+}
+
+.no-reminders{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 12rem 1rem 16rem 1rem;
+    gap: 2rem;
+}
+
+.no-reminders > p{
+    color: #A64AC9;
+    text-shadow: 1px 1px 2px black;
+    letter-spacing: 0.3rem;
+    font-size: 4rem;
+}
+
+.no-reminders > a{
+    width: 20%;
+}
+
+/* REMINDER CARDS -REMINDERS PAGE */
+
+.reminder-card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 15%;
+    background-color: #FCCD04;
+    border: 0.15rem solid black;
+    box-shadow: -6px 6px 10px 5px #FFB48F;
+}
+
+.reminder-card > img{
+    width: 100%;
+    object-fit:contain;
+}
+
+.default-image-card{
+    width: 100%;
+    object-fit: contain;
+    font-size: 20rem;
+}
+
+.reminder-card-content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.reminder-card-content > h1{
+    color: #A64AC9;
+    text-align: center;
+    text-shadow: 1px 1px 1px black;
+    letter-spacing: 0.15rem;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    font-size: 1.8rem;
+}
+
+.reminder-card-content > hr{
+    height: 0.3rem;
+    width: 40%;
+    background-color: #47f6ff;
+    border: none;
+    border-radius: 0.2rem;
+}
+
+.reminder-card-buttons{
+    display: flex;
+    gap: 0.5rem;
+    margin: 0.5rem;
+    align-self: flex-end;
+}
+
+.reminder-card-content-info{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* CREATE REMINDER PAGE */
+.create-reminder-page{
+    padding: 3rem;
+    margin-bottom: 15rem;
+    display: flex;
+    flex-direction: column;
+    width: 75%;
+}
+
+.create-reminder-page-title{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    padding: 1rem;
+}
+
+.create-reminder-page-title > h1{
+    color: #A64AC9;
+    text-shadow: 1px 1px 2px black;
+    font-size: 4rem;
+    letter-spacing: 0.3rem;
+}
+
+.create-reminder-page-title > hr{
+    width: 50%;
+    height: 0.3rem;
+    background-color: #FCCD04;
+    border: none;
+    border-radius: 0.3rem;
+}
+
+.create-reminder-page-content-settings,.create-reminder-page-content-card{
+    display: flex;
+    padding: 2rem;
+    border: 2px solid black;
+}
+
+.create-reminder-page-content-settings{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    background-color: #FCCD04;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    padding-top: 2rem;
+    gap: 1.3rem;
+    margin-right: auto;
+    margin-left: 10rem;
+    width: 30%;
+}
+
+
+.cr-settings-title{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+}
+
+.cr-settings-title > h1{
+    font-size: 3.5rem;
+    color: #A64AC9;
+    text-shadow: 1px 1px 1.5px black;
+    letter-spacing: 0.15rem;
+}
+
+.cr-settings-title > hr{
+    height: 0.3rem;
+    background-color: #17E9E0;
+    width: 50%;
+    border: none;
+    border-radius: 0.1rem;
+    margin: 0.5rem 0;
+}
+
+.cr-settings-form{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 1.5rem;
+    padding: 1rem;
+}
+
+.cr-settings-form > label,.cr-settings-form > button{
+    background-color: #FFB48F;
+    border: 1px solid black;
+    font-size: 1.3rem;
+    color: white;
+    text-shadow: 1px 1px 2px black;
+    letter-spacing: 0.1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 0.3rem;
+}
+
+.cr-settings-form > button{
+    margin-top: 1.5rem;
+    font-size: 1rem;
+}
+
+.cr-content-container{
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-around;
+    margin-top: 3rem;
+    padding: 2rem 0;
+}
+
+#cr-content-image-def,.default-image-card{
+    width: 100%;
+    min-height: 15rem;
+    object-fit: contain;
+    border-radius: 0.5rem;
+    color: #A64AC9;
+}
+
+#cr-page-img{
+    width: 100%;
+    object-fit: contain;
+    border-radius: 0.3rem;
+}
+
+.create-reminder-page-content-card{
+    display: flex;
+    flex-direction: column;
+    background-color: #FCCD04;
+    border-radius: 0.5rem;
+    width: 22%;
+    padding: 0;
+    margin-left: auto;
+    margin-right: 10rem;
+}
+
+.cr-content-info{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+}
+
+.cr-content-info > h3,.cr-content-info>p{
+    margin-top: 1rem;
+    text-align: center;
+    color: #A64AC9;
+    text-shadow: 1px 1px 2px black;
+    font-size: 1.8rem;
+    letter-spacing: 0.3rem;
+    border-radius: 0.3rem;
+}
+
+.cr-content-info > hr{
+    height: 0.3rem;
+    background-color: #17E9E0;
+    width: 50%;
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+    border: none;
+    border-radius: 0.3rem;
+}
+
+.cr-content-info > h5{
+    font-size: 1.25rem;
+    letter-spacing: 0.2rem;
+}
+
+
+/* PROFILE CONTACT US*/
+
+/* PROFILE ABOUT US */
+
+/* H1 PROFILE */
+
+.profile-h1{
+    font-size: 3.5rem;
+    color: #A64AC9;
+    text-shadow: 1px 1px 2px black;
+    letter-spacing: 0.15rem;
+}
