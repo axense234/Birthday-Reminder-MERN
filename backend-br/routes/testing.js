@@ -3,6 +3,6 @@ const router = express.Router();
 
 const { deleteAllReminders } = require("../controllers/testing");
 
-router.delete("/reminders", deleteAllReminders);
+router.delete("/user/reminders/:userId", deleteAllReminders);
 
 module.exports = router;

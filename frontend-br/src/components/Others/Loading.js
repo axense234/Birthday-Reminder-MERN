@@ -23,6 +23,13 @@ const Loading = ({ type = "normal" }) => {
         <MoonLander size="120px" color="#A64AC9"></MoonLander>
       </div>
     );
+  } else if (type === "single-reminder") {
+    return (
+      <div className="loading-container loading-single-card">
+        <h1 id="loading-reminders-h1">Loading,please wait...</h1>
+        <MoonLander size="120px" color="#A64AC9"></MoonLander>
+      </div>
+    );
   }
   return "no-types";
 };

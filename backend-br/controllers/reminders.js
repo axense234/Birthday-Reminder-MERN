@@ -47,7 +47,7 @@ const createReminder = async (req, res) => {
 
 const getAllUserReminders = async (req, res) => {
   const { id: userId } = req.params;
-  const { sortType } = req.query;
+  const { sortType, inputValue } = req.query;
 
   let userReminders = [];
 
@@ -56,32 +56,65 @@ const getAllUserReminders = async (req, res) => {
   }
 
   // Sorting
+
+  // By name
   if (sortType === "name") {
+    console.log("name");
     userReminders = await Reminder.find({ createdBy: userId }).sort({
       name: 1,
     });
+    if (inputValue) {
+      userReminders = userReminders.filter((reminder) => {
+        return reminder.name.includes(inputValue);
+      });
+    }
     if (!userReminders) {
       return res.status(404).json("User has no reminders.");
     }
+    // By birthday date
   } else if (sortType === "birthdayDate") {
+    console.log("date");
     userReminders = await Reminder.find({ createdBy: userId }).sort({
-      birthday: 1,
+      birthday: "desc",
     });
+    if (inputValue) {
+      userReminders = userReminders.filter((reminder) => {
+        return reminder.birthday.toString().includes(inputValue);
+      });
+    }
     if (!userReminders) {
       return res.status(404).json("User has no reminders.");
     }
+    // By createdAt
   } else if (sortType === "newest") {
     console.log("newest");
     userReminders = await Reminder.find({ createdBy: userId }).sort({
-      createdAt: 1,
+      createdAt: -1,
     });
-    console.log(userReminders);
+    if (inputValue) {
+      userReminders = userReminders.filter((reminder) => {
+        return reminder.createdAt.toString().includes(inputValue);
+      });
+    }
+    if (!userReminders) {
+      return res.status(404).json("User has no reminders.");
+    }
+    // By time remaining(birthday)
+  } else if (sortType === "timeRemaining") {
+    console.log("timeremaining");
+    userReminders = await Reminder.find({ createdBy: userId }).sort({
+      birthday: "asc",
+    });
+    if (inputValue) {
+      userReminders = userReminders.filter((reminder) => {
+        return reminder.birthday.toString().includes(inputValue);
+      });
+    }
     if (!userReminders) {
       return res.status(404).json("User has no reminders.");
     }
   } else {
     userReminders = await Reminder.find({ createdBy: userId });
-    console.log(userReminders);
     if (!userReminders) {
       return res.status(404).json("User has no reminders.");
     }
@@ -92,7 +125,6 @@ const getAllUserReminders = async (req, res) => {
 
 const getSingleReminder = async (req, res) => {
   const { remId } = req.params;
-  console.log(remId);
   const reminder = await Reminder.findOne({ _id: remId });
   if (!reminder) {
     return res.status(404).json(`No reminder found with id: ${remId}`);
@@ -143,7 +175,6 @@ const patchSingleReminder = async (req, res) => {
   if (!editedReminder) {
     return res.status(404).json("No reminder found!");
   }
-  console.log(editedReminder);
   res.status(200).json(editedReminder);
 };
 

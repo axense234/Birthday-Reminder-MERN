@@ -13,7 +13,6 @@ const NoReminders = () => {
         <a
           className="options-btn"
           href="/create-reminder"
-          target="_blank"
           onClick={() => {
             localStorage.setItem("Reminder Mode", "edit");
           }}

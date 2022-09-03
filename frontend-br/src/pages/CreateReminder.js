@@ -16,12 +16,14 @@ const CreateReminder = () => {
     setReminder,
     addReminder,
     showModal,
+    setMode,
     loadingCard,
   } = useGlobalContext();
 
   useEffect(() => {
     localStorage.setItem("Reminder Mode", "create");
-  }, []);
+    setMode("create");
+  });
 
   if (loading) {
     return <Loading></Loading>;

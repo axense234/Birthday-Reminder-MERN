@@ -27,7 +27,7 @@ const sortingOptions = [
 ];
 
 const SortingModal = () => {
-  const { filterReminders, sortingModal } = useGlobalContext();
+  const { filterReminders, sortingModal, sortInput } = useGlobalContext();
   return (
     <article className="sorting-modal-container" ref={sortingModal}>
       <article className="sorting-modal-options">
@@ -36,7 +36,7 @@ const SortingModal = () => {
             <button
               key={option.id}
               onClick={() => {
-                filterReminders(option.filter);
+                filterReminders(option.filter, sortInput);
               }}
             >
               {option.optionName}

@@ -18,12 +18,14 @@ const EditReminder = () => {
     showModal,
     loadingCard,
     mode,
+    setMode,
     editReminder,
   } = useGlobalContext();
 
   useEffect(() => {
     localStorage.setItem("Reminder Mode", "edit");
-  }, []);
+    setMode("edit");
+  });
 
   if (loading) {
     return <Loading></Loading>;

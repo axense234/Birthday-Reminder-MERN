@@ -1,8 +1,6 @@
 import React from "react";
 // Profile Map
 import profileMap from "../../profileMap";
-// Components
-import { Link } from "react-router-dom";
 
 const ProfileTitle = () => {
   return (
@@ -13,9 +11,9 @@ const ProfileTitle = () => {
         <div className="profile-content-map">
           {profileMap.map((category) => {
             return (
-              <Link to={category.link} key={category.id}>
+              <a href={category.link} key={category.id}>
                 {category.profileName}
-              </Link>
+              </a>
             );
           })}
         </div>

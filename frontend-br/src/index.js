@@ -14,6 +14,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { AppProvider } from "./context";
 // CSS
 import "./styles.css";
+// SW
+import registerSW from "./swDev";
 
 const root = createRoot(document.getElementById("root"));
 
@@ -40,3 +42,7 @@ root.render(
     </AppProvider>
   </React.StrictMode>
 );
+
+if ("serviceWorker" in navigator) {
+  registerSW();
+}

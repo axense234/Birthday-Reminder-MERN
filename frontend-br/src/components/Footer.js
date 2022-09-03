@@ -26,7 +26,7 @@ const Footer = () => {
           {footerSitemap.map((link) => {
             return (
               <li key={link.id}>
-                <a href={link.url} id="sitemap-link">
+                <a href={link.url} className="sitemap-link">
                   {link.linkName}
                 </a>
               </li>
@@ -37,16 +37,36 @@ const Footer = () => {
       <div className="footer-sm-icons">
         <h1 className="footer-title">Social Media</h1>
         <div className="sm-icons-container">
-          <a href="https://facebook.com" target="_blank" rel="noreferrer">
+          <a
+            href="https://facebook.com"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Facebook Link"
+          >
             <FaFacebook></FaFacebook>
           </a>
-          <a href="https://instagram.com" target="_blank" rel="noreferrer">
+          <a
+            href="https://instagram.com"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Instagram Link"
+          >
             <FaInstagram></FaInstagram>
           </a>
-          <a href="https://youtube.com" target="_blank" rel="noreferrer">
+          <a
+            href="https://youtube.com"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Youtube Link"
+          >
             <FaYoutube></FaYoutube>
           </a>
-          <a href="https://github.com" target="_blank" rel="noreferrer">
+          <a
+            href="https://github.com"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Github Link"
+          >
             <FaGithub></FaGithub>
           </a>
         </div>

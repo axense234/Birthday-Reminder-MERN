@@ -95,7 +95,6 @@ const FormScheme = ({ type }) => {
           </button>
         </form>
       </main>
-      )
     </>
   );
 };

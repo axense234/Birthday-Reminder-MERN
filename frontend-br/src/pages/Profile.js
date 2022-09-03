@@ -59,10 +59,10 @@ const Profile = () => {
           ></ProfileReminders>
         </div>
         <div className="profile-part3">
-          {/* 4.Profile Contact Us */}
-          <ProfileContactUs></ProfileContactUs>
-          {/* 5.Proifle About Us */}
+          {/* 4.Profile About Us */}
           <ProfileAboutUs></ProfileAboutUs>
+          {/* 5.Profile Contact Us */}
+          <ProfileContactUs></ProfileContactUs>
         </div>
       </main>
       <Footer></Footer>

@@ -60,10 +60,10 @@ const ProfileSettings = ({
               placeholder=""
             />
           </div>
+          <button type="submit" onClick={(e) => handleSettingsSubmitFunc(e)}>
+            Save Changes
+          </button>
         </form>
-        <button type="submit" onClick={(e) => handleSettingsSubmitFunc(e)}>
-          Save Changes
-        </button>
       </div>
     </>
   );

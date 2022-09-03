@@ -17,7 +17,12 @@ const Content = () => {
           Sign Up Now For Free!
         </Link>
       </div>
-      <img src="https://i.ibb.co/02y2Mym/testingimage.png" alt="fa" />
+      <img
+        src="https://i.ibb.co/02y2Mym/testingimage.png"
+        alt="fa"
+        width="800"
+        height="300"
+      />
     </main>
   );
 };

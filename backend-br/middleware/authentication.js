@@ -4,7 +4,6 @@ const authenticationMiddleware = async (req, res, next) => {
   const authHeader = req.headers.authorization;
 
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
-    console.log("thats right");
     return res.status(401).json({
       msg: "Invalid Token",
     });

@@ -21,7 +21,7 @@ const ReminderPreview = ({ loadingCard, reminder }) => {
             <h3>{reminderName}</h3>
             <hr />
             <p>Birthday:</p>
-            <h5>{new Date(reminderBirthday).toLocaleString()}</h5>
+            <h5>{new Date(reminderBirthday).toLocaleString().split(",")[0]}</h5>
           </div>
         </div>
       )}

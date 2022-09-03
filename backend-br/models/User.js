@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 const UserSchema = new mongoose.Schema(
@@ -34,6 +34,10 @@ const UserSchema = new mongoose.Schema(
     imageSecureUrl: {
       type: String,
       default: "",
+    },
+    subscription: {
+      type: Object,
+      default: {},
     },
   },
   { timestamps: true }

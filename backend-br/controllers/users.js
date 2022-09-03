@@ -1,14 +1,8 @@
 const User = require("../models/User");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 
 const getAllUsers = async (req, res) => {
-  const users = await User.find({});
-  if (users.length === 0) {
-    return res
-      .status(404)
-      .json({ success: false, msg: "No users found right now." });
-  }
-  res.status(200).json({ success: true, msg: "Users found:", users });
+  return res.status(200).json({ success: true, msg: "Hello" });
 };
 
 const getUser = async (req, res) => {

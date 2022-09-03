@@ -1,30 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { AiFillEdit } from "react-icons/ai";
 import { CgProfile } from "react-icons/cg";
-import { FaTrash } from "react-icons/fa";
+import { FaTrash, FaBell, FaBellSlash } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { useGlobalContext } from "../../context";
 
-const ReminderCard = ({ reminder, deleteReminder, userId, getReminder }) => {
+const ReminderCard = ({
+  reminder,
+  deleteReminder,
+  userId,
+  getReminder,
+  exampleMode = false,
+}) => {
   const { imageSecureUrl, name, birthday, _id: remId } = reminder;
 
+  const { handleNotificationsSending, isMutedGlobal } = useGlobalContext();
+
+  // Dates
   const birthdayDate = new Date(birthday).getTime();
   const currentDate = new Date().getTime();
-
-  const [triggerRender, setTriggerRender] = useState(false);
-
-  // Trigger Rerender every Second
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setTriggerRender((t) => {
-        return !t;
-      });
-    }, 1000);
-    return () => {
-      clearInterval(interval);
-    };
-  }, []);
-
-  // Date values
   let currentDays = Math.floor(
     Math.max(
       birthdayDate / 1000 / 60 / 60 / 24 -
@@ -32,14 +26,66 @@ const ReminderCard = ({ reminder, deleteReminder, userId, getReminder }) => {
       0
     )
   );
+
+  const [triggerRender, setTriggerRender] = useState(false);
+  const [reminderBirthday, setReminderBirthday] = useState(false);
+  const [isMuted, setIsMuted] = useState(false);
+
+  useEffect(() => {
+    // Handle isMuted based on global/local isMuted
+    const isMutedLocal = localStorage.getItem(`${name} isMuted`);
+    setIsMuted(isMutedGlobal === "true" ? true : false);
+    setIsMuted(isMutedLocal === "true" ? true : false);
+  }, [name, isMutedGlobal]);
+
+  // Trigger Rerender every Second
+  useEffect(() => {
+    // Interval
+    const interval = setInterval(() => {
+      if (
+        Math.floor(currentDate / 1000 / 60 / 60 / 24) ===
+        Math.floor(birthdayDate / 1000 / 60 / 60 / 24)
+      ) {
+        if (
+          reminderBirthday === false &&
+          !exampleMode &&
+          Notification.permission === "granted" &&
+          !isMuted
+        ) {
+          handleNotificationsSending(remId);
+        }
+        setReminderBirthday(true);
+      }
+      setTriggerRender((t) => {
+        return !t;
+      });
+    }, 1000);
+    return () => {
+      clearInterval(interval);
+    };
+  }, [
+    birthdayDate,
+    currentDate,
+    handleNotificationsSending,
+    remId,
+    reminderBirthday,
+    exampleMode,
+    isMuted,
+  ]);
+
+  // Date values
   let currentHours = Math.floor(Math.max(24 - new Date().getHours(), 0));
   let currentMinutes = Math.floor(Math.max(60 - new Date().getMinutes()));
   let currentSeconds = 60 - new Date().getSeconds();
 
   return (
-    <article className="reminder-card">
+    <article
+      className={
+        !reminderBirthday ? "reminder-card" : "reminder-card activeBirthday"
+      }
+    >
       {imageSecureUrl ? (
-        <img src={imageSecureUrl} alt="404" />
+        <img src={imageSecureUrl} alt="404" width="700" height="700" />
       ) : (
         <CgProfile className="default-image-card"></CgProfile>
       )}
@@ -49,7 +95,9 @@ const ReminderCard = ({ reminder, deleteReminder, userId, getReminder }) => {
         <div className="reminder-card-content-info">
           <div className="birthday-reminder">
             <p>Birthday:</p>
-            <span>{new Date(birthday).toLocaleDateString()}</span>
+            <span>
+              {new Date(birthday).toLocaleDateString() || triggerRender}
+            </span>
           </div>
           <div className="birthday-reminder">
             <p>Time Remaining:</p>
@@ -59,28 +107,44 @@ const ReminderCard = ({ reminder, deleteReminder, userId, getReminder }) => {
                 {currentMinutes} minutes,
                 {currentSeconds} seconds
               </span>
+            ) : reminderBirthday ? (
+              <span className="birthdayTime">Birthday Time</span>
             ) : (
               <span>Expired</span>
             )}
           </div>
         </div>
-        <div className="reminder-card-buttons">
-          <Link
-            className="edit-reminder"
-            to="/edit-reminder"
-            onClick={() => {
-              getReminder(remId);
-            }}
-          >
-            <AiFillEdit></AiFillEdit>
-          </Link>
-          <button
-            className="delete-reminder"
-            onClick={() => deleteReminder(userId, remId, "reminders")}
-          >
-            <FaTrash></FaTrash>
-          </button>
-        </div>
+        {exampleMode || (
+          <div className="reminder-card-buttons">
+            <button
+              className="notify-reminder"
+              onClick={() => {
+                setIsMuted(!isMuted);
+                localStorage.setItem(`${name} isMuted`, `${!isMuted}`);
+              }}
+              aria-label="Bell Button"
+            >
+              {!isMuted ? <FaBell /> : <FaBellSlash />}
+            </button>
+            <Link
+              className="edit-reminder"
+              to="/edit-reminder"
+              onClick={() => {
+                getReminder(remId);
+              }}
+              aria-label="Edit Button"
+            >
+              <AiFillEdit></AiFillEdit>
+            </Link>
+            <button
+              className="delete-reminder"
+              onClick={() => deleteReminder(userId, remId, "reminders")}
+              aria-label="Delete Button"
+            >
+              <FaTrash></FaTrash>
+            </button>
+          </div>
+        )}
       </div>
     </article>
   );

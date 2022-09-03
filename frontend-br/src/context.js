@@ -8,7 +8,10 @@ import React, {
 import axios from "axios";
 
 // URL IN USE:
-const URL_IN_USE = "http://localhost:4000";
+const URL_IN_USE =
+  process.env.NODE_ENV === "development"
+    ? "http://localhost:4000"
+    : "https://birthday-reminder-backend-ca.herokuapp.com";
 
 // CONTEXT
 const AppContext = createContext();
@@ -20,11 +23,18 @@ const PROFILE_URL = `${URL_IN_USE}/profile`;
 const REMINDERS_URL = `${URL_IN_USE}/user/reminders`;
 const ADD_REMINDER_URL = `${URL_IN_USE}/create-reminder`;
 const EDIT_REMINDER_URL = `${URL_IN_USE}/edit-reminder/`;
+const SUBSCRIBE_URL = `${URL_IN_USE}/subscribe`;
+const SEND_NOTIFICATIONS_URL = `${URL_IN_USE}/notify/`;
+
+const PUBLIC_VAPID_KEY =
+  "BFUVmfbmd-_84Iy2O2UaVCMmpR0428jGs0UozH5jrhV9Pq_mQ14TVa4qxBMDAqPK5R443YUu6OhhjWDr6Sk8BGQ";
 
 const AppProvider = ({ children }) => {
   // State Variables
   const [jwtToken, setJwtToken] = useState("");
   const [mode, setMode] = useState("");
+  const [sortInput, setSortInput] = useState("");
+  const [sortType, setSortType] = useState("name");
   // State Variables - Loading
   const [loading, setLoading] = useState(true);
   const [loadingCard, setLoadingCard] = useState(true);
@@ -45,6 +55,9 @@ const AppProvider = ({ children }) => {
     msg: "Default Message",
   });
   const [showSortingModal, setShowSortingModal] = useState(false);
+  const [showNotificationsModal, setShowNotificationsModal] = useState(true);
+  const [overlay, setOverlay] = useState(false);
+  const [showSlider, setShowSlider] = useState(false);
   // State Variables - Reminders
   const [showReminders, setShowReminders] = useState(false);
   const [reminders, setReminders] = useState([]);
@@ -55,8 +68,12 @@ const AppProvider = ({ children }) => {
     reminderBirthday: "",
   });
 
+  const [isMutedGlobal, setIsMutedGlobal] = useState("false");
+
   // useRef
   const sortingModal = useRef(null);
+  const deleteRemindersModalRef = useRef(null);
+  const NavbarSliderRef = useRef(null);
 
   // HANDLE IMAGE POSTING
   const handleImagePosting = async (imageFile) => {
@@ -85,7 +102,7 @@ const AppProvider = ({ children }) => {
 
   // HANDLE GETTING THE PROFILE FROM BACKEND
   const handleGetProfile = React.useCallback(
-    async (token, type) => {
+    async (token, type, sortInput = "") => {
       const { data } = await axios.get(PROFILE_URL, {
         headers: { Authorization: `Bearer ${jwtToken || token}` },
       });
@@ -96,10 +113,9 @@ const AppProvider = ({ children }) => {
         imageId: "",
       });
       const { data: reminders } = await axios.get(
-        `${REMINDERS_URL}/${await data.id}?sortType=${type}`,
+        `${REMINDERS_URL}/${await data.id}?sortType=${type}&&inputValue=${sortInput}`,
         { headers: { Authorization: `Bearer ${jwtToken || token}` } }
       );
-      console.log(await reminders.reminders);
       setReminders(await reminders.reminders);
     },
     [jwtToken]
@@ -134,7 +150,6 @@ const AppProvider = ({ children }) => {
       }
       window.location.href = "/";
     } catch (error) {
-      console.log(error);
       const errorMessage = error.response.data;
       activateModal(errorMessage);
       setLoading(false);
@@ -149,7 +164,6 @@ const AppProvider = ({ children }) => {
       const newReminders = reminders.filter((reminder) => {
         return reminder.id !== remId;
       });
-      console.log(newReminders);
       setReminders(newReminders);
       // BACKEND LOGIC
       await axios.delete(`${REMINDERS_URL}/${userId}/${remId}`, {
@@ -159,6 +173,29 @@ const AppProvider = ({ children }) => {
     } catch (error) {
       console.log(error.response.data);
     }
+  };
+
+  // DELETE ALL REMINDERS
+  const handleDeleteAllReminders = async () => {
+    try {
+      await axios
+        .delete(`${REMINDERS_URL}/${profile.id}`, {
+          headers: { Authorization: `Bearer ${jwtToken}` },
+        })
+        .then(setReminders([]))
+        .then(setOverlay(false));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // HANDLE THE CLOSING OF THE DELETE REMINDERS OVERLAY
+  const handleDeleteAllRemindersModalClosing = () => {
+    const modal = deleteRemindersModalRef.current;
+    modal.style.transform = "scale(0)";
+    setTimeout(() => {
+      setOverlay(false);
+    }, 300);
   };
 
   // ADD REMINDERS
@@ -214,12 +251,11 @@ const AppProvider = ({ children }) => {
     try {
       e.preventDefault();
       setLoading(true);
-      const editRes = await axios.patch(
+      await axios.patch(
         `${EDIT_REMINDER_URL}${remId}`,
         { reminder },
         { headers: { Authorization: `Bearer ${jwtToken}` } }
       );
-      console.log(editRes);
       window.location.href = "/reminders";
     } catch (error) {
       const errorMessage = error.response.data;
@@ -229,22 +265,33 @@ const AppProvider = ({ children }) => {
   };
 
   // FILTER REMINDERS
-  const filterReminders = async (type) => {
+  const filterReminders = async (type, inputValue = "") => {
+    setLoadingReminders(true);
     try {
       localStorage.setItem("Sort Type", type);
+
       const { data: reminders } = await axios.get(
-        `${REMINDERS_URL}/${await profile.id}?sortType=${type}`,
+        `${REMINDERS_URL}/${await profile.id}?sortType=${type}&&inputValue=${inputValue}`,
         {
           headers: { Authorization: `Bearer ${jwtToken}` },
         }
       );
-
+      setMode("sorting");
+      localStorage.setItem("Reminder Mode", "sorting");
       setReminders(await reminders.reminders);
-      console.log("first");
     } catch (error) {
       console.log(error);
     }
   };
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setLoadingReminders(false);
+    }, 1000);
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [sortInput]);
 
   // LOGIN/SIGN UP HANDLE SUBMIT
   const handleSubmit = async (e, type) => {
@@ -260,6 +307,7 @@ const AppProvider = ({ children }) => {
     else if (type === "signup") {
       console.log("signup");
       // SIGNING UP
+
       try {
         setLoading(true);
         const {
@@ -297,6 +345,40 @@ const AppProvider = ({ children }) => {
       }
     }
   };
+
+  // Handling notifications subscription
+  const handleNotificationsSubscription = React.useCallback(async () => {
+    try {
+      // Getting the registered service worker
+      const sw = await navigator.serviceWorker.ready;
+      // Subscribing
+      const subscription = await sw.pushManager.subscribe({
+        userVisibleOnly: true,
+        applicationServerKey: PUBLIC_VAPID_KEY,
+      });
+
+      await axios.post(`${SUBSCRIBE_URL}/${profile.id}`, subscription, {
+        headers: { Authorization: `Bearer ${jwtToken}` },
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }, [profile.id, jwtToken]);
+
+  // Handling sending notifications
+  const handleNotificationsSending = React.useCallback(
+    async (remId) => {
+      try {
+        await axios.get(`${SEND_NOTIFICATIONS_URL}${profile.id}/${remId}`, {
+          headers: { Authorization: `Bearer ${jwtToken}` },
+        });
+      } catch (error) {
+        setShowNotificationsModal(true);
+      }
+    },
+    [profile.id, jwtToken]
+  );
+
   // Handling JWT Token,Sort Type from Local Storage
   useEffect(() => {
     (async () => {
@@ -304,12 +386,24 @@ const AppProvider = ({ children }) => {
         const token = localStorage.getItem("Token");
         const type = localStorage.getItem("Sort Type");
         const reminderMode = localStorage.getItem("Reminder Mode");
+        const sortInputStorage = localStorage.getItem("sortInput");
         const editedReminder = JSON.parse(
           localStorage.getItem("Edited Reminder")
         );
+        const IgnoreNotificationsPop = localStorage.getItem(
+          "Ignore Notifications Popup"
+        );
+        const isMutedGlobalStorage = localStorage.getItem("isMuted Global");
         if (token) {
           setJwtToken(token);
-          if (type) {
+          if (type && sortInputStorage) {
+            setSortType(type);
+            setSortInput(sortInputStorage);
+            await handleGetProfile(token, type, sortInputStorage).then(() =>
+              setLoading(false)
+            );
+          } else if (type) {
+            setSortType(type);
             await handleGetProfile(token, type).then(() => setLoading(false));
           }
           if (reminderMode) {
@@ -318,10 +412,15 @@ const AppProvider = ({ children }) => {
           if (editedReminder && !(reminderMode === "create")) {
             setReminder(editedReminder);
           }
+          if (IgnoreNotificationsPop === "true") {
+            setShowNotificationsModal(false);
+          }
+          if (isMutedGlobalStorage) {
+            setIsMutedGlobal(isMutedGlobalStorage);
+          }
         }
         const timeout = setTimeout(() => setLoadingReminders(false), 1000);
         setLoading(false);
-        console.log(new Date().toUTCString());
         return () => {
           clearTimeout(timeout);
         };
@@ -403,7 +502,25 @@ const AppProvider = ({ children }) => {
         sortingModal,
         getReminder,
         mode,
+        setMode,
         editReminder,
+        sortInput,
+        setSortInput,
+        sortType,
+        handleNotificationsSubscription,
+        handleNotificationsSending,
+        showNotificationsModal,
+        setShowNotificationsModal,
+        isMutedGlobal,
+        setIsMutedGlobal,
+        handleDeleteAllReminders,
+        overlay,
+        setOverlay,
+        deleteRemindersModalRef,
+        handleDeleteAllRemindersModalClosing,
+        NavbarSliderRef,
+        showSlider,
+        setShowSlider,
       }}
     >
       {children}

@@ -15,8 +15,16 @@ const {
 
 router.get("/reminders", authenticationMiddleware, getAllReminders);
 router.post("/create-reminder", authenticationMiddleware, createReminder);
-router.get("/edit-reminder/:remId", getSingleReminder);
-router.patch("/edit-reminder/:remId", patchSingleReminder);
+router.get(
+  "/edit-reminder/:remId",
+  authenticationMiddleware,
+  getSingleReminder
+);
+router.patch(
+  "/edit-reminder/:remId",
+  authenticationMiddleware,
+  patchSingleReminder
+);
 
 router.get(
   "/user/reminders/:id",

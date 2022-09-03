@@ -9,6 +9,7 @@ import NoReminders from "../components/Reminders/NoReminders";
 import RemindersOptions from "../components/Reminders/RemindersOptions";
 import RemindersContent from "../components/Reminders/RemindersContent";
 import RemindersTitle from "../components/Reminders/RemindersTitle";
+import DeleteRemindersModal from "../components/Modals/DeleteRemindersModal";
 
 const Reminders = () => {
   const {
@@ -22,6 +23,13 @@ const Reminders = () => {
     profile,
     deleteReminder,
     getReminder,
+    sortInput,
+    setSortInput,
+    filterReminders,
+    sortType,
+    mode,
+    handleNotificationsSubscription,
+    overlay,
   } = useGlobalContext();
 
   useEffect(() => {
@@ -41,13 +49,14 @@ const Reminders = () => {
     return <NoJWT></NoJWT>;
   }
 
-  // User has no reminders
-  if (reminders.length === 0) {
+  // User has no reminders and the sort input is false
+  if (reminders.length === 0 && mode !== "sorting") {
     return <NoReminders></NoReminders>;
   }
 
   return (
     <>
+      {overlay && <DeleteRemindersModal />}
       <Navbar></Navbar>
       <main className="reminders-page-container">
         {/* Title */}
@@ -56,6 +65,10 @@ const Reminders = () => {
         <RemindersOptions
           setShowSortingModal={setShowSortingModal}
           showSortingModal={showSortingModal}
+          sortInput={sortInput}
+          setSortInput={setSortInput}
+          filterReminders={filterReminders}
+          sortType={sortType}
         ></RemindersOptions>
         {/* Content Display(all reminder cards) */}
         <RemindersContent
@@ -64,6 +77,8 @@ const Reminders = () => {
           deleteReminder={deleteReminder}
           profile={profile}
           getReminder={getReminder}
+          sortInput={sortInput}
+          handleNotificationsSubscription={handleNotificationsSubscription}
         ></RemindersContent>
       </main>
       <Footer></Footer>
