@@ -11,7 +11,7 @@ import axios from "axios";
 const URL_IN_USE =
   process.env.NODE_ENV === "development"
     ? "http://localhost:4000"
-    : "https://birthday-reminder-backend-ca.herokuapp.com";
+    : "https://birthdayreminder-server-ca.onrender.com";
 
 // CONTEXT
 const AppContext = createContext();
