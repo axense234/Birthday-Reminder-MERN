@@ -79,7 +79,7 @@ const AppProvider = ({ children }) => {
   const handleImagePosting = async (imageFile) => {
     const formData = new FormData();
     formData.append("file", imageFile);
-    formData.append("upload_preset", "tqx8l9ud");
+    formData.append("upload_preset", "birthday-reminder");
 
     const postRes = await axios.post(
       "https://api.cloudinary.com/v1_1/birthdayreminder/image/upload",
