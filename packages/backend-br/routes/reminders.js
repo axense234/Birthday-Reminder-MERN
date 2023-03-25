@@ -2,9 +2,7 @@ const express = require("express");
 
 const router = express.Router();
 
-// Authorization middleware
-const authenticationMiddleware = require("../middleware/authentication");
-
+// Controllers and Middleware
 const {
   getAllReminders,
   createReminder,
@@ -13,6 +11,7 @@ const {
   getSingleReminder,
   patchSingleReminder,
 } = require("../controllers/reminders");
+const authenticationMiddleware = require("../middleware/authentication");
 
 router.get("/reminders", authenticationMiddleware, getAllReminders);
 router.post("/create-reminder", authenticationMiddleware, createReminder);

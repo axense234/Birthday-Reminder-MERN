@@ -2,10 +2,9 @@ const Reminder = require("../models/Reminder");
 
 const deleteAllReminders = async (req, res) => {
   const { userId } = req.params;
-  const deleteRes = await Reminder.deleteMany({ createdBy: userId });
-  console.log(deleteRes);
+  await Reminder.deleteMany({ createdBy: userId });
 
-  res.status(200).json({ msg: "Successfully deleted all Reminders." });
+  return res.status(200).json({ msg: "Successfully deleted all Reminders." });
 };
 
 module.exports = { deleteAllReminders };

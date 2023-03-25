@@ -3,10 +3,12 @@ const User = require("../models/User");
 
 const getAllReminders = async (req, res) => {
   const reminders = await Reminder.find({});
+
   if (reminders.length < 1) {
     return res.status(404).json("No users found.");
   }
-  res.status(200).json({ reminders });
+
+  return res.status(200).json({ reminders });
 };
 
 const createReminder = async (req, res) => {
@@ -14,6 +16,7 @@ const createReminder = async (req, res) => {
     reminder,
     profile: { id: createdBy },
   } = req.body;
+
   const {
     reminderImageUrl: imageSecureUrl,
     reminderName: name,
@@ -25,7 +28,7 @@ const createReminder = async (req, res) => {
   if (!associatedUser) {
     return res.status(404).json(`No user found with associated id.`);
   }
-  // Incremnet User's reminder count by 1
+
   await User.findOneAndUpdate(
     { _id: createdBy },
     { reminderCount: associatedUser.reminderCount + 1 },
@@ -34,7 +37,6 @@ const createReminder = async (req, res) => {
     }
   );
 
-  // Create reminder
   const createdReminder = await Reminder.create({
     createdBy,
     birthday,
@@ -42,7 +44,7 @@ const createReminder = async (req, res) => {
     imageSecureUrl,
   });
 
-  res.status(201).json({ createdReminder });
+  return res.status(201).json({ createdReminder });
 };
 
 const getAllUserReminders = async (req, res) => {
@@ -55,14 +57,11 @@ const getAllUserReminders = async (req, res) => {
     return res.status(500).json("Server error,no id");
   }
 
-  // Sorting
-
-  // By name
   if (sortType === "name") {
-    console.log("name");
     userReminders = await Reminder.find({ createdBy: userId }).sort({
       name: 1,
     });
+
     if (inputValue) {
       userReminders = userReminders.filter((reminder) => {
         return reminder.name.includes(inputValue);
@@ -73,7 +72,6 @@ const getAllUserReminders = async (req, res) => {
     }
     // By birthday date
   } else if (sortType === "birthdayDate") {
-    console.log("date");
     userReminders = await Reminder.find({ createdBy: userId }).sort({
       birthday: "desc",
     });
@@ -87,7 +85,6 @@ const getAllUserReminders = async (req, res) => {
     }
     // By createdAt
   } else if (sortType === "newest") {
-    console.log("newest");
     userReminders = await Reminder.find({ createdBy: userId }).sort({
       createdAt: -1,
     });
@@ -101,7 +98,6 @@ const getAllUserReminders = async (req, res) => {
     }
     // By time remaining(birthday)
   } else if (sortType === "timeRemaining") {
-    console.log("timeremaining");
     userReminders = await Reminder.find({ createdBy: userId }).sort({
       birthday: "asc",
     });
@@ -126,10 +122,12 @@ const getAllUserReminders = async (req, res) => {
 const getSingleReminder = async (req, res) => {
   const { remId } = req.params;
   const reminder = await Reminder.findOne({ _id: remId });
+
   if (!reminder) {
     return res.status(404).json(`No reminder found with id: ${remId}`);
   }
-  res.status(200).json({ reminder });
+
+  return res.status(200).json({ reminder });
 };
 
 const deleteSingleReminder = async (req, res) => {
@@ -153,7 +151,7 @@ const deleteSingleReminder = async (req, res) => {
       reminderCount: user.reminderCount - 1,
     }
   );
-  return res.status(200).json("Good.");
+  return res.status(200).json({ msg: "Successfully deleted reminder." });
 };
 
 const patchSingleReminder = async (req, res) => {
@@ -164,6 +162,7 @@ const patchSingleReminder = async (req, res) => {
     reminderName: name,
     reminderImageUrl: imageSecureUrl,
   } = reminder;
+
   const editedReminder = await Reminder.findOneAndUpdate(
     { _id: remId },
     { birthday, name, imageSecureUrl },
@@ -172,10 +171,12 @@ const patchSingleReminder = async (req, res) => {
       runValidators: true,
     }
   );
+
   if (!editedReminder) {
     return res.status(404).json("No reminder found!");
   }
-  res.status(200).json(editedReminder);
+
+  return res.status(200).json(editedReminder);
 };
 
 module.exports = {

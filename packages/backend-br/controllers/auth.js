@@ -1,10 +1,12 @@
 const User = require("../models/User");
 
 const signupUser = async (req, res) => {
-  const createdUser = await User.create(req.body.accountDetails);
+  const { accountDetails } = req.body;
+
+  const createdUser = await User.create(accountDetails);
   const token = createdUser.createJWT();
 
-  res.status(201).json({
+  return res.status(201).json({
     msg: `Created user with id ${createdUser._id}`,
     createdUser,
     token,
@@ -13,6 +15,7 @@ const signupUser = async (req, res) => {
 
 const loginUser = async (req, res) => {
   const { email, password, username } = req.body;
+
   if (!username) {
     return res.status(400).json("Please provide username.");
   }
@@ -26,6 +29,7 @@ const loginUser = async (req, res) => {
   }
 
   const user = await User.findOne({ email });
+
   if (!user) {
     return res.status(404).json(`No user found with email ${email}.`);
   }
@@ -36,11 +40,11 @@ const loginUser = async (req, res) => {
 
   const doesPasswordMatch = await user.comparePassword(password);
   if (!doesPasswordMatch) {
-    return res.status(401).json("Invalid password,please try again.");
+    return res.status(401).json("Invalid password, please try again.");
   }
 
   const token = user.createJWT();
-  res.status(200).json({ token });
+  return res.status(200).json({ token });
 };
 
 module.exports = { signupUser, loginUser };

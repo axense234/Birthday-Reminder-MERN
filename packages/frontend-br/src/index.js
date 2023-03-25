@@ -26,19 +26,13 @@ root.render(
     <AppProvider>
       <Router>
         <Routes>
-          <Route path='/' element={<Home></Home>} />
-          <Route path='/signup' element={<RegisterForm></RegisterForm>} />
-          <Route path='/login' element={<LoginForm></LoginForm>} />
-          <Route path='/profile' element={<Profile></Profile>} />
-          <Route path='/reminders' element={<Reminders></Reminders>} />
-          <Route
-            path='/create-reminder'
-            element={<CreateReminder></CreateReminder>}
-          />
-          <Route
-            path='/edit-reminder'
-            element={<EditReminder></EditReminder>}
-          />
+          <Route path='/' element={<Home />} />
+          <Route path='/signup' element={<RegisterForm />} />
+          <Route path='/login' element={<LoginForm />} />
+          <Route path='/profile' element={<Profile />} />
+          <Route path='/reminders' element={<Reminders />} />
+          <Route path='/create-reminder' element={<CreateReminder />} />
+          <Route path='/edit-reminder' element={<EditReminder />} />
         </Routes>
       </Router>
     </AppProvider>

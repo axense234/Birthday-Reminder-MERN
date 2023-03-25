@@ -2,10 +2,9 @@ const express = require("express");
 
 const router = express.Router();
 
-// Authentication Middleware
-const authenticationMiddleware = require("../middleware/authentication");
-
+// Controllers and middleware
 const { getAllUsers, getUser, updateUser } = require("../controllers/users");
+const authenticationMiddleware = require("../middleware/authentication");
 
 router.get("/", getAllUsers);
 router.get("/profile", authenticationMiddleware, getUser);

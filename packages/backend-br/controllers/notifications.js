@@ -17,7 +17,7 @@ const subscribeUser = async (req, res) => {
   const subscription = req.body;
   const { userId } = req.params;
 
-  const foundUser = await User.findByIdAndUpdate(
+  await User.findByIdAndUpdate(
     userId,
     { subscription },
     {
@@ -47,7 +47,7 @@ const notifyUser = async (req, res) => {
       foundUser.subscription,
       JSON.stringify({
         title: foundReminder.name,
-        body: `It's ${foundReminder.name}'s birthday,let's celebrate!`,
+        body: `It's ${foundReminder.name}'s birthday, let's celebrate!`,
         image: foundReminder.imageSecureUrl,
       })
     )

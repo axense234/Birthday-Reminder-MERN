@@ -8,7 +8,8 @@ const getAllUsers = async (req, res) => {
 const getUser = async (req, res) => {
   const { userId } = req.user;
   const foundUser = await User.findOne({ _id: userId });
-  res.status(200).json({
+
+  return res.status(200).json({
     username: foundUser.username,
     email: foundUser.email,
     createdAt: foundUser.createdAt,
@@ -28,16 +29,18 @@ const updateUser = async (req, res) => {
   if (!settings) {
     return res.status(404).json("No settings found to be updated.");
   }
+
   const newUser = await User.findOneAndUpdate({ _id: settings.id }, settings, {
     new: true,
     runValidators: true,
   });
+
   if (!newUser) {
     return res.status(404).json(`No user found with id ${settings.id}.`);
   }
 
   newUser.createJWT();
-  res.status(200).json(newUser);
+  return res.status(200).json(newUser);
 };
 
 module.exports = { getAllUsers, getUser, updateUser };
