@@ -1,0 +1,57 @@
+{
+  "extends": ["airbnb", "plugin:node/recommended", "prettier"],
+  "plugins": ["prettier"],
+  "root": true,
+  "rules": {
+    "arrow-body-style": "off",
+    "quotes": "off",
+    "linebreak-style": "off",
+    "implicit-arrow-linebreak": "off",
+    "indent": "off",
+    "function-paren-newline": "off",
+    "jsx-quotes": "off",
+    "camelcase": "off",
+    "comma-dangle": "off",
+    "semi": "off",
+    "operator-linebreak": "off",
+    "object-curly-newline": "off",
+    "consistent-return": "off",
+
+    "no-param-reassign": "off",
+    "no-shadow": "off",
+    "no-console": "warn",
+    "no-unused-vars": "off",
+    "no-undef": "warn",
+    "no-use-before-define": "off",
+    "no-loop-func": "off",
+    "no-underscore-dangle": "off",
+
+    "node/no-unsupported-features/es-syntax": "off",
+    "node/no-missing-import": "off",
+    "node/no-unpublished-import": "off",
+    "node/no-extraneous-import": "off",
+    "node/no-extraneous-require": "off",
+
+    "import/no-unresolved": "off",
+    "import/extensions": "off",
+    "import/first": "off",
+    "import/prefer-default-export": "off",
+    "import/no-extraneous-dependencies": "off",
+
+    "jsx-a11y/label-has-associated-control": "off",
+    "jsx-a11y/no-noninteractive-element-interactions": "off",
+    "jsx-a11y/click-events-have-key-events": "off",
+
+    "react/jsx-filename-extension": "off",
+    "react/jsx-no-useless-fragment": "warn",
+    "react/jsx-props-no-spreading": "off",
+    "react/no-unescaped-entities": "off",
+    "react/default-props-match-prop-types": "off",
+    "react/function-component-definition": "off",
+    "react/react-in-jsx-scope": "off",
+    "react/prop-types": "off",
+    "react/jsx-curly-newline": "off",
+    "react/jsx-one-expression-per-line": "off",
+    "react/self-closing-comp": "warn"
+  }
+}
