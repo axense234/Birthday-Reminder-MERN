@@ -6,8 +6,19 @@ const getAllUsers = async (req, res) => {
 };
 
 const getUser = async (req, res) => {
+  console.log(req.user);
   const { userId } = req.user;
   const foundUser = await User.findOne({ _id: userId });
+
+  if (!userId || userId === "undefined") {
+    return res.status(400).json({ msg: `Invalid value for userId!` });
+  }
+
+  if (!foundUser) {
+    return res
+      .status(404)
+      .json({ msg: `Could not find user with userId: ${userId}!` });
+  }
 
   return res.status(200).json({
     username: foundUser.username,

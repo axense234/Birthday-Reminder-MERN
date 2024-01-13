@@ -67,6 +67,14 @@ i will talk about the advantages and drawbacks of the website.</p>`
 
 `<p>This is my first project using the MERN Stack(MongoDB,Express,React,Node). After learning the basics of HTML CSS JS and some other technologies like Bootstrap and after practicing with smaller only HTML CSS JS projects, i learned React.js from Coding Addict's Youtube Channel(which i recommend since the guy knows how to teach very well), i practiced React.js with a lot of projects(project ideas were taken from Coding Addict's video aswell). After a lot of React.js, HTML, CSS, JS practice i have begun to learn Express and Node(again, from Coding Addict's Youtube Channel). After a lot of headaches understanding the Express and Node tutorial, i moved on to his 4 Express/Node Projects video, which showed him using mongodb with mongoose(and some extra things). I had to practice a lot by making tests myself, then taking them.After learning a lot about Backend/Frontend development and the MERN Stack, i actually got into practicing with Mongodb, Express, React and Node by making this very first project, Birthday Reminder</p>`
 
+# Generate a private key
+
+openssl ecparam -name prime256v1 -genkey -noout -out vapid-private.pem
+
+# Derive the public key from the private key
+
+openssl ec -in vapid-private.pem -pubout -out vapid-public.pem
+
 ## **Mistakes made in development:**
 
 1. Not making **different css files** for **different pages/components**
