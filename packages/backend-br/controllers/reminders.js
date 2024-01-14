@@ -5,7 +5,7 @@ const getAllReminders = async (req, res) => {
   const reminders = await Reminder.find({});
 
   if (reminders.length < 1) {
-    return res.status(404).json("No users found.");
+    return res.status(404).json("No reminders found.");
   }
 
   return res.status(200).json({ reminders });

@@ -1,0 +1,49 @@
+paths:
+  /signup:
+    post:
+      description: Route for creating a user in Birthday Reminder MERN API.
+      tags:
+        - AUTH Routes
+      requestBody:
+        description: The request body to create a user.
+        content:
+          application/json:
+            schemas:
+              $ref:"#components/schemas/User"
+            examples:
+              User:
+                summary: Mock account info to create user.
+                value: 
+                  username: Bob
+                  email: bob@gmail.com
+                  password: bob12345
+      responses:
+        201:
+          description: Successfully created a user in Birthday Reminder MERN API!
+  /login:
+    post:
+      description: Route for logging into your account in Birthday Reminder MERN API.
+      tags:
+        - AUTH Routes
+      requestBody:
+        description: The request body to log into your account.
+        content:
+          application/json:
+            schemas:
+              $ref:"#components/schemas/Login"
+            examples:
+              User:
+                summary: Mock account info to log into.
+                value: 
+                  username: Bob
+                  email: bob@gmail.com
+                  password: bob12345
+      responses:
+        200:
+          description: Successfully logged into your account.
+        400:
+          description: Bad request, check your request body to see if there is a mistake.
+        401:
+          description: Wrong password inputed.
+        404:
+          description: Could not find the user to log into with the given email.

@@ -1,0 +1,49 @@
+paths:
+  /:
+    get:
+      description: Route for health checking the Birthday Reminder MERN API.
+      tags:
+        - HEALTH CHECK Routes
+      responses:
+        200:
+          description: Successfull health check, the server is running.
+  /profile:
+    get: 
+      description: Route for getting user profile by userId in the JWT.
+      security:
+      - bearerAuth: []
+      tags:
+        - USERS Routes
+      responses:
+        200:
+          description: Successfully found user profile
+        400:
+          description: Bad request, something is very wrong.
+        404:
+          description: Could not find the user with the userId found in the JWT.
+    patch:
+      description: Route for updating user profile in Birthday Reminder MERN API.
+      security:
+      - bearerAuth: []
+      tags:
+        - USERS Routes
+      requestBody:
+        description: The settings of the user profile.
+        content:
+          application/json:
+            schemas:
+              $ref:"#components/schemas/User"
+            examples:
+              Setting:
+                summary: An example of some profile settings.
+                value:
+                  username: Bob
+                  bob: bob123@gmail.com
+                  _id: yourUserId
+      responses:
+        200:
+          description: Successfully updated user.
+        400:
+          description: No settings found in request body.
+        404:
+          description: No user found with the id specified in the settings body.

@@ -32,16 +32,18 @@ const getUser = async (req, res) => {
 const updateUser = async (req, res) => {
   const settings = req.body;
 
+  if (!settings) {
+    return res.status(400).json("No settings found to be updated.");
+  }
+
   if (settings.password) {
     const salt = await bcrypt.genSalt(10);
     settings.password = await bcrypt.hash(settings.password, salt);
   }
 
-  if (!settings) {
-    return res.status(404).json("No settings found to be updated.");
-  }
+  const settingsId = settings.id || settings._id;
 
-  const newUser = await User.findOneAndUpdate({ _id: settings.id }, settings, {
+  const newUser = await User.findOneAndUpdate({ _id: settingsId }, settings, {
     new: true,
     runValidators: true,
   });

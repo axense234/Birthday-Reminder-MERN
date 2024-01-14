@@ -21,11 +21,11 @@ const loginUser = async (req, res) => {
   }
 
   if (!email) {
-    return res.status(401).json("Please provide email.");
+    return res.status(400).json("Please provide email.");
   }
 
   if (!password) {
-    return res.status(401).json("Please provide password.");
+    return res.status(400).json("Please provide password.");
   }
 
   const user = await User.findOne({ email });

@@ -14,6 +14,7 @@ const helmet = require("helmet");
 const cors = require("cors");
 const xss = require("xss-clean");
 const rateLimiter = require("express-rate-limit");
+const expressUI = require("swagger-ui-express");
 const connectDB = require("./db/connect");
 
 // Routes
@@ -26,6 +27,8 @@ const reminders = require("./routes/reminders");
 // Express Middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+const swaggerDocs = require("./utils/swagger");
 
 // Third Party Middleware
 app.use(morgan("tiny"));
@@ -49,6 +52,7 @@ const errorHandlerMiddleware = require("./middleware/errorHandler");
 
 // Routes
 app.use("/", [auth, users, reminders, testing, notifications]);
+app.use("/api/1.0.0/docs", expressUI.serve, expressUI.setup(swaggerDocs));
 app.use(errorHandlerMiddleware);
 
 const startServer = async () => {

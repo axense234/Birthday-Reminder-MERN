@@ -1,0 +1,149 @@
+paths:
+  /reminders:
+    get:
+      description: Route for getting all reminders in Birthday Reminders MERN API.
+      tags:
+        - REMINDERS Routes
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: Successfully got all reminders in Birthday Reminders MERN API.
+        404:
+          description: Could not find any reminders in Birthday Reminders MERN API.
+  /create-reminder:
+    post:
+      description: Route for creating a reminders in Birthday Reminders MERN API.
+      tags:
+        - REMINDERS Routes
+      security:
+        - bearerAuth: []
+      requestBody:
+        description: The body of the reminder you want to create.
+        content:
+          application/json:
+            schemas:
+              $ref: "#components/schemas/CreateReminder"
+            examples:
+              Reminder:
+                summary: Basic reminder example.
+                value:
+                  reminder:
+                    reminderName: Example Reminder
+                    reminderBirthday: "1/26/2022, 2:30:00 PM"
+                    reminderImageUrl: "https://res.cloudinary.com/birthdayreminder/image/upload/v1702486416/Tours%20REACT/HD-wallpaper-irish-landscape-ireland-nature-sky-landscape-coast_pwnydg.jpg"
+                  profile:
+                    id: "65a2bd633d086aca547c3e47"
+      responses:
+        201:
+          description: Successfully created reminder.
+        404:
+          description: No user found with given id.
+  /edit-reminder/{remId}:
+    get:
+      description: Route to get a single reminder by given reminder id in Birthday Reminder MERN API.
+      tags:
+        - REMINDERS Routes
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: remId
+          required: true
+          schema:
+            type: string
+          description: The id of the single reminder you want to get.
+      responses:
+        200:
+          description: Successfully got the single reminder by the given id.
+        404:
+          description: Could not find any reminders with the given reminder id.
+    patch:
+      description: Route for updating a single reminder in Birthday Reminder MERN API.
+      tags:
+        - REMINDERS Routes
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: remId
+          required: true
+          schema:
+            type: string
+          description: The id of the reminder you want to update.
+      requestBody:
+        description: The updated reminder body you want to update your reminder with.
+        content:
+          application/json:
+            schemas:
+              $ref:"#components/schemas/Reminder"
+            examples:
+              Reminder:
+                summary: Change reminder name to Anna.
+                value:
+                  reminder:
+                    reminderName: Anna
+      responses:
+        200:
+          description: Succesfully updated reminder with the given id.
+        404:
+          description: Could not find any reminders with the given id in order to update.
+  /user/reminders/{id}?sortType&inputValue:
+    get:
+      description: Get all reminders of an user in Birthday Reminder MERN API.
+      tags:
+        - REMINDERS Routes
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: The id of the user that you want to get the reminders of.
+        - in: query
+          name: sortType
+          required: false
+          schema:
+            type: string
+          description: The type of sort you want to get your reminders back in.
+        - in: query
+          name: inputValue
+          required: false
+          schema:
+            type: string
+          description: The input value that the birthday reminder needs to include in it's query.
+      responses:
+        200:
+          description: Successfully got all the user reminders.
+        404:
+          description: Could not find any user reminders.
+        500:
+          description: Please specify the user id. 
+  /user/reminders/{userId}/{remId}:
+    delete:
+      description: Route for deleting a user's reminder by given user id and reminder id.
+      tags:
+        - REMINDERS Routes
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          schema:
+            type: string
+          description: The user id.
+        - in: path
+          name: remId
+          required: true
+          schema:
+            type: string
+          description: The reminder id.
+      responses:
+        200:
+          description: Succesfully deleted user's reminder with the given user id and reminder id.
+        404:
+          description: Either no user was found with the given user id, or no reminder was found with the given reminder id.
+          
