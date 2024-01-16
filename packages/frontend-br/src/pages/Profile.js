@@ -31,13 +31,14 @@ const Profile = () => {
   if (loading) {
     return <Loading />;
   }
+
   return (
     <>
       {overlay && <DeleteRemindersModal />}
       <Navbar />
-      <main className='profile-content-container'>
+      <main className="profile-content-container">
         <ProfileTitle />
-        <div className='profile-part1'>
+        <div className="profile-part1">
           <ProfileInfo {...profile} />
           <ProfileSettings
             settings={settings}
@@ -47,7 +48,7 @@ const Profile = () => {
             handleImageUploading={handleImageUploading}
           />
         </div>
-        <div className='profile-part2'>
+        <div className="profile-part2">
           <ProfileReminders
             showReminders={showReminders}
             setShowReminders={setShowReminders}
@@ -56,7 +57,7 @@ const Profile = () => {
             getReminder={getReminder}
           />
         </div>
-        <div className='profile-part3'>
+        <div className="profile-part3">
           <ProfileAboutUs />
           <ProfileContactUs />
         </div>

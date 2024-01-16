@@ -1,5 +1,7 @@
 // Components
 import Modal from "../Modals/Modal";
+// Context
+import { useGlobalContext } from "../../context";
 
 const ReminderSettings = ({
   reminder,
@@ -9,25 +11,27 @@ const ReminderSettings = ({
   showModal,
   mode,
 }) => {
+  const { loadingCloudinaryImage } = useGlobalContext();
+
   return (
     <>
-      <div className='create-reminder-page-content-settings'>
+      <div className="create-reminder-page-content-settings">
         {showModal.active && <Modal msg={showModal.msg} />}
-        <div className='cr-settings-title'>
+        <div className="cr-settings-title">
           <h1>Settings</h1>
           <hr />
         </div>
         <form
-          className='cr-settings-form'
+          className="cr-settings-form"
           onSubmit={(e) => {
             mode === "edit" ? editReminder(e, reminder.id) : addReminder(e);
           }}
         >
-          <label htmlFor='image-cr'>Change Image: </label>
+          <label htmlFor="image-cr">Change Image: </label>
           <input
-            type='file'
-            name='image-cr'
-            id='image-cr'
+            type="file"
+            name="image-cr"
+            id="image-cr"
             onChange={(e) => {
               setReminder({
                 ...reminder,
@@ -35,11 +39,11 @@ const ReminderSettings = ({
               });
             }}
           />
-          <label htmlFor='name-cr'>Change Name: </label>
+          <label htmlFor="name-cr">Change Name: </label>
           <input
-            type='text'
-            name='name-cr'
-            id='name-cr'
+            type="text"
+            name="name-cr"
+            id="name-cr"
             value={reminder.reminderName}
             onChange={(e) => {
               setReminder({
@@ -48,11 +52,11 @@ const ReminderSettings = ({
               });
             }}
           />
-          <label htmlFor='birthday-cr'>Change Birthday: </label>
+          <label htmlFor="birthday-cr">Change Birthday: </label>
           <input
-            type='date'
-            name='birthday-cr'
-            id='birthday-cr'
+            type="date"
+            name="birthday-cr"
+            id="birthday-cr"
             onChange={(e) => {
               setReminder({
                 ...reminder,
@@ -60,7 +64,15 @@ const ReminderSettings = ({
               });
             }}
           />
-          <button type='submit'>
+          <button
+            type="submit"
+            disabled={loadingCloudinaryImage}
+            style={{
+              filter: loadingCloudinaryImage
+                ? "brightness(0.7)"
+                : "brightness(1)",
+            }}
+          >
             {mode === "edit" ? "Edit Reminder" : "Create Reminder"}
           </button>
         </form>

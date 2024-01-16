@@ -5,13 +5,13 @@ const ProfileInfo = ({
   username,
   email,
   createdAt,
-  bcount,
+  reminderCount,
   imageSecureUrl,
 }) => {
   return (
-    <div className='profile-content-info' id='info'>
-      <h1 className='profile-h1'>1.Info</h1>
-      <ul className='profile-content-info-details'>
+    <div className="profile-content-info" id="info">
+      <h1 className="profile-h1">1.Info</h1>
+      <ul className="profile-content-info-details">
         <li>
           <p>Username:</p>
           <span>{username}</span>
@@ -26,24 +26,24 @@ const ProfileInfo = ({
         </li>
         <li>
           <p>Created At:</p>
-          <span>{createdAt}</span>
+          <span>{new Date(createdAt).toUTCString()}</span>
         </li>
         <li>
           <p>Reminder Count:</p>
-          <span>{bcount || "0"}</span>
+          <span>{reminderCount || "0"}</span>
         </li>
         <li>
           <p>Profile Image:</p>
           {imageSecureUrl ? (
-            <a href={imageSecureUrl} target='_blank' rel='noreferrer'>
+            <a href={imageSecureUrl} target="_blank" rel="noreferrer">
               <img
                 src={imageSecureUrl}
-                alt='gay'
-                className='profile-image-info'
+                alt="gay"
+                className="profile-image-info"
               />
             </a>
           ) : (
-            <CgProfile id='profile-img-def' />
+            <CgProfile id="profile-img-def" />
           )}
         </li>
       </ul>

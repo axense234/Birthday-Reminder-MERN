@@ -8,16 +8,20 @@ const ReminderPreview = ({ loadingCard, reminder }) => {
   return (
     <>
       {loadingCard ? (
-        <Loading type='reminder-card' />
+        <Loading type="reminder-card" />
       ) : (
-        <div className='create-reminder-page-content-card'>
+        <div className="create-reminder-page-content-card">
           {reminderImageUrl ? (
-            <img src={reminderImageUrl} alt='gay' id='cr-page-img' />
+            <img src={reminderImageUrl} alt="gay" id="cr-page-img" />
           ) : (
-            <CgProfile id='cr-content-image-def' />
+            <CgProfile id="cr-content-image-def" />
           )}
-          <div className='cr-content-info'>
-            <h3>{reminderName}</h3>
+          <div className="cr-content-info">
+            <h3>
+              {reminderName.length >= 20
+                ? `${reminderName.slice(0, 17)}...`
+                : reminderName}
+            </h3>
             <hr />
             <p>Birthday:</p>
             <h5>{new Date(reminderBirthday).toLocaleString().split(",")[0]}</h5>

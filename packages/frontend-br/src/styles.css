@@ -1372,9 +1372,7 @@ nav {
   max-width: 20rem;
 
   background-color: var(--dark-yellow);
-  border: 3px solid black;
-  border-top-left-radius: 1rem;
-  border-top-right-radius: 1rem;
+  border: 2px solid black;
 
   box-shadow: -3px 3px 6px 3px var(--normal-cyan);
   transition: transform 0.2s, opacity 0.2s;
@@ -1389,11 +1387,7 @@ nav {
 .reminder-card > img {
   width: 100%;
   height: auto;
-  object-fit: contain;
-  border-top-left-radius: 1rem;
-  border-top-right-radius: 1rem;
   max-height: 20rem;
-  border-radius: 1rem;
 }
 
 .default-image-card {
@@ -1591,7 +1585,6 @@ nav {
   width: 100%;
   min-height: 15rem;
   object-fit: contain;
-  border-radius: 0.5rem;
   color: var(--dark-pink);
 }
 

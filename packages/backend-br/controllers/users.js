@@ -26,6 +26,7 @@ const getUser = async (req, res) => {
     createdAt: foundUser.createdAt,
     id: foundUser._id,
     imageSecureUrl: foundUser.imageSecureUrl,
+    reminderCount: foundUser.reminderCount,
   });
 };
 

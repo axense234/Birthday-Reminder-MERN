@@ -43,6 +43,7 @@ const AppProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [loadingCard, setLoadingCard] = useState(true);
   const [loadingReminders, setLoadingReminders] = useState(true);
+  const [loadingCloudinaryImage, setLoadingCloudinaryImage] = useState(false);
   // State Variables - Profile and Settings
   const [profile, setProfile] = useState({});
   const [settings, setSettings] = useState({});
@@ -85,10 +86,16 @@ const AppProvider = ({ children }) => {
     formData.append("file", imageFile);
     formData.append("upload_preset", "birthday-reminder");
 
-    const postRes = await axios.post(
-      "https://api.cloudinary.com/v1_1/birthdayreminder/image/upload",
-      formData
-    );
+    setLoadingCloudinaryImage(true);
+    const postRes = await axios
+      .post(
+        "https://api.cloudinary.com/v1_1/birthdayreminder/image/upload",
+        formData
+      )
+      .then((res) => {
+        setLoadingCloudinaryImage(false);
+        return res;
+      });
     return postRes;
   };
 
@@ -529,6 +536,7 @@ const AppProvider = ({ children }) => {
         setOverlayFunctionType,
         reminderId,
         setReminderId,
+        loadingCloudinaryImage,
       }}
     >
       {children}
