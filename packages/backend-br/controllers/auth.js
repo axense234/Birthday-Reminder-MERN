@@ -1,7 +1,7 @@
 const User = require("../models/User");
 
 const signupUser = async (req, res) => {
-  const { accountDetails } = req.body;
+  const accountDetails = req.body;
 
   const createdUser = await User.create(accountDetails);
   const token = createdUser.createJWT();

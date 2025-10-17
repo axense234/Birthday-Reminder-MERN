@@ -1,10 +1,10 @@
 # **Birthday Reminder - MERN Stack Project**
 
-My very first MERN fullstack built.Learned a lot from working on this project since it is my first big project.
+My very first MERN fullstack built. Learned a lot from working on this project since it is my first big project.
 
 ## **Description**
 
-My very first MERN fullstack built.Learned a lot from working on this project since it is my first big project.The project revolves around the idea of creating reminder cards for people in order to be notified on their birthday's. In order to create those reminders, you need to sign up / log in.
+My very first MERN fullstack built. Learned a lot from working on this project since it is my first big project. The project revolves around the idea of creating reminder cards for people in order to be notified on their birthday's. In order to create those reminders, you need to sign up / log in.
 
 ## **Getting Started**
 

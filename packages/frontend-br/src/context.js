@@ -324,7 +324,7 @@ const AppProvider = ({ children }) => {
         const {
           data: { token },
         } = await axios.post(SIGNUP_URL, {
-          accountDetails,
+          ...accountDetails
         });
         // LOGGING THE USER IN
         setJwtToken(await token);

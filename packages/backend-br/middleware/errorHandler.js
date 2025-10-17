@@ -17,7 +17,7 @@ const errorHandlerMiddleware = (err, req, res, next) => {
     customError.msg = "Notifications are not allowed.";
   }
 
-  console.log(err);
+  console.log(err)
 
   return res.status(customError.statusCode).json(customError.msg);
 };
