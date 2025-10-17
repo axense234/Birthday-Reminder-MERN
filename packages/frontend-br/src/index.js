@@ -40,5 +40,6 @@ root.render(
 );
 
 if ("serviceWorker" in navigator) {
+  console.log("yep")
   registerSW();
 }

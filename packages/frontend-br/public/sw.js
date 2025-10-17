@@ -4,7 +4,6 @@ const CACHE_STORAGE = "v1Cache";
 // Handle push event
 this.addEventListener("push", async (e) => {
   let payload = e.data.json();
-  payload.icon = "https://i.ibb.co/g9qXcYc/Calendar-Flatline.png";
   await e.waitUntil(
     self.registration.showNotification("Birthday Time", payload)
   );

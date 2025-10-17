@@ -42,6 +42,7 @@ const notifyUser = async (req, res) => {
   const foundUser = await User.findOne({ _id: userId });
   const foundReminder = await Reminder.findOne({ _id: remId });
 
+  console.log("hello")
   webpush
     .sendNotification(
       foundUser.subscription,
@@ -49,10 +50,13 @@ const notifyUser = async (req, res) => {
         title: foundReminder.name,
         body: `It's ${foundReminder.name}'s birthday, let's celebrate!`,
         image: foundReminder.imageSecureUrl,
+        icon: "https://res.cloudinary.com/birthdayreminder/image/upload/c_scale,w_72/v1760696279/birthday-cake_2454297_jbsakm.png",
+        timestamp: new Date().getTime()
+
       })
-    )
+    ).then((res)=>console.log("sent notification"))
     .catch((err) => {
-      responseMessage = "No";
+      responseMessage = "nope";
     });
 
   return res.status(200).json({ msg: responseMessage });

@@ -29,7 +29,7 @@ const SUBSCRIBE_URL = `${URL_IN_USE}/subscribe`;
 const SEND_NOTIFICATIONS_URL = `${URL_IN_USE}/notify/`;
 
 const PUBLIC_VAPID_KEY =
-  "BFUVmfbmd-_84Iy2O2UaVCMmpR0428jGs0UozH5jrhV9Pq_mQ14TVa4qxBMDAqPK5R443YUu6OhhjWDr6Sk8BGQ";
+  "BIct42ssHkgvt62kvAq807R4PIsAVBds_lyOyvL2z4EpgBZ20abVlsrrZiNjaYyOqboItHCaZlkt5RwKTHoa8Ug";
 
 const AppProvider = ({ children }) => {
   // State Variables
